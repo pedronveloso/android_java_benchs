@@ -9,7 +9,7 @@ package com.pedronveloso.java.benchs.Utils;
  */
 public class ReflectionTests {
 
-    public void reflectionMethod() {
+    public static void reflectionMethod() {
         //just some random calculations
         int a = 2, b = 3;
         a = a + b;
@@ -18,39 +18,34 @@ public class ReflectionTests {
     // All methods from here on are just to make the # of methods bigger for this class, they are never used really
     // useful for testing ProGuard performance as well.
 
-    public void reflectionMethod1() {
+    public static void reflectionMethod1() {
         //just some random calculations
         int a = 2, b = 3;
         a = a + b;
     }
 
-    public void reflectionMethod2() {
+    public static void reflectionMethod2() {
         //just some random calculations
         int a = 2, b = 3;
         a = a + b;
     }
 
-    public void reflectionMethod3() {
+    public static void reflectionMethod3() {
         //just some random calculations
         int a = 2, b = 3;
         a = a + b;
     }
 
-    public void reflectionMethod4() {
+    public static void reflectionMethod4() {
         //just some random calculations
         int a = 2, b = 3;
         a = a + b;
     }
 
-    public void reflectionMethod5() {
+    public static void reflectionMethod5() {
         //just some random calculations
         int a = 2, b = 3;
         a = a + b;
     }
 
-    public void reflectionMethod6() {
-        //just some random calculations
-        int a = 2, b = 3;
-        a = a + b;
-    }
 }
