@@ -11,11 +11,15 @@ import com.pedronveloso.java.benchs.Utils.Utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
     private long startTime;
-    private static final int CARDINAL_RUN_LOOPS = 10000;
+    private static final int CARDINAL_RUN_LOOPS = 1000;
+    private static final int ARRAY_SIZE = 10000;
+
+    private ArrayList<Integer> dummyArray;
 
 
     @Override
@@ -25,6 +29,9 @@ public class MainActivity extends Activity {
         new TestReflectionCalls().execute(1);
     }
 
+    /**
+     * Reflection method call
+     */
     private class TestReflectionCalls extends AsyncTask<Integer, Integer, Integer> {
         protected Integer doInBackground(Integer... params) {
             Utils.debugFunc("will now test Reflection calls to a class.", Log.VERBOSE);
@@ -54,6 +61,9 @@ public class MainActivity extends Activity {
     }
 
 
+    /**
+     * Direct method call
+     */
     private class TestDirectCalls extends AsyncTask<Integer, Integer, Integer> {
         protected Integer doInBackground(Integer... params) {
             Utils.debugFunc("will now test Direct calls to a class.", Log.VERBOSE);
@@ -61,14 +71,59 @@ public class MainActivity extends Activity {
             for (int i = 0; i < CARDINAL_RUN_LOOPS; i++) {
                 DirectCallTests.directCallMethod();
             }
-
-
             return 0;
         }
 
 
         protected void onPostExecute(Integer result) {
-            Utils.debugFunc(CARDINAL_RUN_LOOPS + " Direct method calls took: " + (System.currentTimeMillis() - startTime), Log.DEBUG);
+            Utils.debugFunc("Direct method calls took: " + (System.currentTimeMillis() - startTime), Log.DEBUG);
+            new TestSimpleForLoop().execute(1);
+        }
+    }
+
+
+    /**
+     * Simple For Loop
+     */
+    private class TestSimpleForLoop extends AsyncTask<Integer, Integer, Integer> {
+        protected Integer doInBackground(Integer... params) {
+            //fill the array once
+            dummyArray = new ArrayList<Integer>(ARRAY_SIZE);
+            for (int i = 0; i < ARRAY_SIZE; i++) {
+                dummyArray.add(0);
+            }
+            Utils.debugFunc("will now test Simple For Loop.", Log.VERBOSE);
+            startTime = System.currentTimeMillis();
+            for (int i = 0; i < ARRAY_SIZE; i++) {
+                dummyArray.set(i, 1);
+            }
+            return 0;
+        }
+
+
+        protected void onPostExecute(Integer result) {
+            Utils.debugFunc("Simple For Loop took: " + (System.currentTimeMillis() - startTime), Log.DEBUG);
+            new TestForEachLoop().execute(1);
+        }
+    }
+
+
+    /**
+     * Simple For Loop
+     */
+    private class TestForEachLoop extends AsyncTask<Integer, Integer, Integer> {
+        protected Integer doInBackground(Integer... params) {
+            Utils.debugFunc("will now test For Each Loop.", Log.VERBOSE);
+            startTime = System.currentTimeMillis();
+            for (Integer elem : dummyArray) {
+                elem = 2;
+            }
+            return 0;
+        }
+
+
+        protected void onPostExecute(Integer result) {
+            Utils.debugFunc(CARDINAL_RUN_LOOPS + " For Each Loop took: " + (System.currentTimeMillis() - startTime), Log.DEBUG);
         }
     }
 }
