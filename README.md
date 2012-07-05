@@ -1,10 +1,20 @@
-android_java_benchs
-===================
+Android Java Benchmarks - android_java_benchs
+==============================================
 
-Android Java Benchmarks
+Author: Pedro Veloso
+Contact email: pedro.n.veloso@gmail.com
+
+What is this?
+-------------
 
 This project benchmarks several programming patterns that have similar ends in Android. I made it for myself to measure
 performance impact in various Android versions and devices.
+
+What it is not?
+---------------
+
+A benchmark to the JNI Android interface or other low-level optimizations.
+
 
 License
 =======
